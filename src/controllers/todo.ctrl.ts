@@ -5,8 +5,8 @@ import { Todos } from "../models/todo.model";
 export const createToDo: RequestHandler = async (req, res, next) => {
   var todos = await Todos.create({ ...req.body });
   return res
-    .status(200)
-    .json({ message: "Todo created successfully", data: todos });
+    .status(201)
+    .json({ message: "created successfully", data: todos });
 };
 
 export const deleteToDo: RequestHandler = async (req, res, next) => {
@@ -15,14 +15,14 @@ export const deleteToDo: RequestHandler = async (req, res, next) => {
   await Todos.destroy({ where: { id } });
   return res
     .status(200)
-    .json({ message: "Todo deleted successfully", data: deletedTodo });
+    .json({ message: "deleted successfully", data: deletedTodo });
 };
 
 export const getAllToDo: RequestHandler = async (req, res, next) => {
   const allTodos: Todos[] = await Todos.findAll();
   return res
     .status(200)
-    .json({ message: "Todo fetched successfully", data: allTodos });
+    .json({ message: "fetched successfully", data: allTodos });
 };
 
 export const getTodoById: RequestHandler = async (req, res, next) => {
@@ -30,7 +30,7 @@ export const getTodoById: RequestHandler = async (req, res, next) => {
   const todos: Todos | null = await Todos.findByPk(id);
   return res
     .status(200)
-    .json({ message: "Todo fetched successfully", data: todos });
+    .json({ message: "fetched successfully", data: todos });
 };
 
 export const updateTodo: RequestHandler = async (req, res, next) => {
@@ -39,5 +39,5 @@ export const updateTodo: RequestHandler = async (req, res, next) => {
   const updatedTodos: Todos | null = await Todos.findByPk(id);
   return res
     .status(200)
-    .json({ message: "Todo updated successfully", data: updatedTodos });
+    .json({ message: "updated successfully", data: updatedTodos });
 };

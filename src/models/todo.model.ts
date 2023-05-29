@@ -10,4 +10,10 @@ export class Todos extends Model {
     allowNull: false,
   })
   name!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  description!: string;
 }

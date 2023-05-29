@@ -1,9 +1,12 @@
 import express from "express";
 
-import todoRoutes from "./routes/todo.router";
 import connection from "./configs/database";
-
 import { json, urlencoded } from "body-parser";
+import config from "./configs";
+
+
+import todoRoutes from "./routes/todo.router";
+import indexRoutes from "./routes/index.router";
 
 const app = express();
 
@@ -11,8 +14,8 @@ app.use(json());
 
 app.use(urlencoded({ extended: true }));
 
+app.use("/", indexRoutes);
 app.use("/todos", todoRoutes);
-
 
 connection
   .sync()
@@ -24,7 +27,7 @@ connection
   });
 
 
-app.listen(3005, () => {
-  console.log("Server started on port 3005");
+app.listen(config.PORT, () => {
+  console.log(`Server started on port http://localhost:${config.PORT} `);
 });
 
