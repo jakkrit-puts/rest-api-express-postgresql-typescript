@@ -43,7 +43,7 @@ connection
   });
 
 
-app.listen(config.PORT, () => {
+app.listen(Number(config.PORT), '0.0.0.0', () => {
   console.log("---------------------------------------------------------");
   console.log(`Server started on port http://localhost:${config.PORT} `);
   console.log("---------------------------------------------------------");

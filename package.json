@@ -11,7 +11,8 @@
     "dev": "nodemon",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:docker": "yarn build && node --inspect=0.0.0.0 dist/app.js"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
