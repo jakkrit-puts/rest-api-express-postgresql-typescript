@@ -1,7 +1,7 @@
 import jwt, { Secret } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import config from "../configs";
-import { Users } from "../models/user.model";
+import { User } from "../models/user.model";
 
 export const SECRET_KEY: Secret = config.JWT_SECRET;
 
@@ -19,7 +19,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     const decoded = jwt.verify(token, SECRET_KEY) as JwtPayload;
 
-    const user = await Users.findByPk(decoded.id)
+    const user = await User.findByPk(decoded.id)
 
     res.locals.user = user;
 

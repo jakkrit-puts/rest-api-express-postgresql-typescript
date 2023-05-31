@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import { validationResult } from "express-validator";
 
-import { Users } from "../models/user.model";
+import { User } from "../models/user.model";
 import { hashPassword } from "../utils/hash";
 import { BadRequestError, ConflictError, NotFoundError, ValidationError } from "../utils/error";
 
@@ -22,7 +22,7 @@ export const login: RequestHandler = async (req, res, next) => {
 
     const payload = req.body
 
-    const user = await Users.findOne({ where:{ username: payload.username } }); 
+    const user = await User.findOne({ where:{ username: payload.username } }); 
     if(!user){
       throw new BadRequestError('username incorrect or not found')
     }   
@@ -61,12 +61,12 @@ export const register: RequestHandler = async (req, res, next) => {
 
   const payload = req.body
 
-  const userExist = await Users.findOne({  where: { username: payload.username } })
+  const userExist = await User.findOne({  where: { username: payload.username } })
   if (userExist) {
     throw new ConflictError('username already exist')
   }
   
-  let user = new Users();
+  let user = new User();
   user.username = payload.username;
   user.password = await hashPassword(payload.password)
   user.fullname = payload.fullname
