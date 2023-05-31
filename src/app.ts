@@ -1,21 +1,33 @@
 import express from "express";
+import { json, urlencoded } from "body-parser";
+import path from "path";
+import cors from 'cors';
 
 import connection from "./configs/database";
-import { json, urlencoded } from "body-parser";
 import config from "./configs";
+import { errorHandler } from "./middlewares/error_handler";
 
-
-import todoRoutes from "./routes/todo.router";
 import indexRoutes from "./routes/index.router";
+import authRoutes from "./routes/auth.router";
+import userRoutes from "./routes/user.router";
+import todoRoutes from "./routes/todo.router";
+
 
 const app = express();
 
-app.use(json());
+app.use(cors());
+app.use(json({limit: "2mb" }));
+app.use(urlencoded({ limit: "2mb", extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(urlencoded({ extended: true }));
 
 app.use("/", indexRoutes);
-app.use("/todos", todoRoutes);
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/todo", todoRoutes);
+
+
+app.use(errorHandler)
 
 connection
   .sync()

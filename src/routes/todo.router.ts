@@ -7,13 +7,16 @@ import {
   updateTodo,
   getTodoById,
 } from "../controllers/todo.ctrl";
+import { TodoCreateValidateData } from "../validations/todo.validation";
+import { checkSchema } from "express-validator";
+import jwtAuth from "../middlewares/jwt_auth";
 
 const router = Router();
 
-router.post("/", createToDo);
-router.get("/", getAllToDo);
-router.get("/:id", getTodoById);
-router.put("/:id", updateTodo);
-router.delete("/:id", deleteToDo);
+router.post("/", jwtAuth, checkSchema(TodoCreateValidateData), createToDo);
+router.get("/", jwtAuth, getAllToDo);
+router.get("/:id", jwtAuth, getTodoById);
+router.put("/:id", jwtAuth, updateTodo);
+router.delete("/:id", jwtAuth, deleteToDo);
 
 export default router;
