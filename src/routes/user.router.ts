@@ -1,14 +1,13 @@
 import { Router } from "express";
 
-import { deleteUser, getAllUser, getProfile, getUserById, updateUser } from "../controllers/user.ctrl";
+import { deleteUser, getAllUser, getProfile, updateUser } from "../controllers/user.ctrl";
+import jwtAuth from "../middlewares/jwt_auth";
 
 const router = Router();
 
-
-router.get("/", getAllUser);
-router.get("/:id", getUserById);
-router.get("/me", getProfile);
-router.put("/:id", updateUser);
-router.delete("/:id", deleteUser);
+router.get("/", jwtAuth,  getAllUser);
+router.get("/me", jwtAuth, getProfile);
+router.put("/", jwtAuth, updateUser);
+router.delete("/:id", jwtAuth, deleteUser);
 
 export default router;

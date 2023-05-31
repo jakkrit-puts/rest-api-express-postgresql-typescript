@@ -1,9 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
 import config from "../configs";
 import { Dialect } from "sequelize";
-import { Todos } from "../models/todo.model";
-import { Users } from "../models/user.model";
 
+import { User } from "../models/user.model";
+import { Todo } from "../models/todo.model";
 
 const connection = new Sequelize({
   dialect: config.DB_DIARECT as Dialect,
@@ -12,9 +12,8 @@ const connection = new Sequelize({
   username: config.DB_USERNAME,
   password: config.DB_PASSWORD,
   database: config.DB_DATABASE,
-  logging: false,
-  models: [Todos, Users],
+  timezone: config.DB_TIME_ZONE,
+  models: [User, Todo]
 });
-
 
 export default connection;

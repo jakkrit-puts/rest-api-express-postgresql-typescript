@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 
-import { Todos } from "../models/todo.model";
+import { Todo } from "../models/todo.model";
 import { ConflictError, NotFoundError, ValidationError } from "../utils/error";
 import { validationResult } from "express-validator";
 
@@ -14,12 +14,12 @@ export const createToDo: RequestHandler = async (req, res, next) => {
       throw error
     }
 
-    const todoExist = await Todos.findOne({  where: { name: req.body.name } })
+    const todoExist = await Todo.findOne({  where: { name: req.body.name } })
     if (todoExist) {
       throw new ConflictError('todo name already exist')
     }
 
-    const todos = await Todos.create({ ...req.body });
+    const todos = await Todo.create({ ...req.body });
 
     return res
       .status(201)
@@ -33,13 +33,13 @@ export const deleteToDo: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const deletedTodo: Todos | null = await Todos.findByPk(id);
+    const deletedTodo: Todo | null = await Todo.findByPk(id);
 
     if(deletedTodo === null) {
       throw new NotFoundError('data not found')
     }
     
-    await Todos.destroy({ where: { id } });
+    await Todo.destroy({ where: { id } });
     return res
       .status(200)
       .json({ message: "deleted successfully" });
@@ -50,7 +50,7 @@ export const deleteToDo: RequestHandler = async (req, res, next) => {
 
 export const getAllToDo: RequestHandler = async (req, res, next) => {
   try {
-    const allTodos: Todos[] = await Todos.findAll();
+    const allTodos: Todo[] = await Todo.findAll();
     return res
       .status(200)
       .json({ message: "fetched successfully", data: allTodos });
@@ -62,7 +62,7 @@ export const getAllToDo: RequestHandler = async (req, res, next) => {
 export const getTodoById: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const todo: Todos | null = await Todos.findByPk(id);
+    const todo: Todo | null = await Todo.findByPk(id);
 
     if(todo === null) {
       throw new NotFoundError('data not found')
@@ -79,8 +79,8 @@ export const getTodoById: RequestHandler = async (req, res, next) => {
 export const updateTodo: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    await Todos.update({ ...req.body }, { where: { id } });
-    const updatedTodos: Todos | null = await Todos.findByPk(id);
+    await Todo.update({ ...req.body }, { where: { id } });
+    const updatedTodos: Todo | null = await Todo.findByPk(id);
 
     if(updatedTodos === null) {
       throw new NotFoundError('data not found')

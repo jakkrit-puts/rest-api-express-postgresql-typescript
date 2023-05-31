@@ -10,6 +10,7 @@ const config = {
   DB_HOST: process.env.DB_HOST || '',
   DB_DIARECT: process.env.DB_DIARECT || '',
   DB_PORT: process.env.DB_PORT || '',
+  DB_TIME_ZONE: process.env.DB_TIME_ZONE || '',
 
   SALT: process.env.SALT || "",
   JWT_SECRET: process.env.JWT_SECRET || "",
