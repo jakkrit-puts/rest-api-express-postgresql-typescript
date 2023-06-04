@@ -1,5 +1,5 @@
 {
-  "name": "music-ecommerce-service",
+  "name": "restful-api-node-ts",
   "version": "1.0.0",
   "main": "app.js",
   "devDependencies": {},
