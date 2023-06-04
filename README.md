@@ -7,7 +7,7 @@ It is a typescript based boilerplate  application with the Node.js web framework
 - PostgreSQL
 - JWT
 - Hash passwords (bcrypt lib)
-- Sequelize ORM
+- Sequelize ORM / Drizzle ORM
 - Express Validator
 - Role Base
 ```
