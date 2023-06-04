@@ -4,10 +4,10 @@ It is a typescript based boilerplate  application with the Node.js web framework
  ### <g-emoji class="g-emoji" alias="hammer" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f528.png">🔨</g-emoji> Tools & Libraries used
  ```
 - Express
-- MongoDB
+- PostgreSQL
 - JWT
 - Hash passwords (bcrypt lib)
-- Mongoose
+- Sequelize
 - Express Validator
 - Role Base
 ```
